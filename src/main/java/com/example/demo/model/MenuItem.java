@@ -12,6 +12,16 @@ public class MenuItem {
     private double price;
     private String type;
     private List<Ingredient> ingredients;
+    private String restaurantId;
+
+
+    public String getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(String restaurantId) {
+        this.restaurantId = restaurantId;
+    }
 
     // Getters and setters
     public String getId() {

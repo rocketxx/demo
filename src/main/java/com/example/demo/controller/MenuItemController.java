@@ -22,9 +22,10 @@ import com.example.demo.repository.MenuItemRepository;
 public class MenuItemController {
     @Autowired
     private MenuItemRepository menuItemRepository;
-    @GetMapping("/all")
-    public List<MenuItem> getAllMenuItem() {
-        return menuItemRepository.findAll(); 
+
+    @GetMapping("/menu-by-restaurant/{restaurantId}")
+    public List<MenuItem> getByRestaurantId(@PathVariable String restaurantId) {
+        return menuItemRepository.findByRestaurantId(restaurantId);
     }
         
     @PostMapping("/create")
@@ -51,9 +52,10 @@ public class MenuItemController {
         }
     }
 
-    @PostMapping("/createMock")
-    public MenuItem createMock() {
+    @PostMapping("/createMock/{idRestaurant}")
+    public MenuItem createMock(@PathVariable String idRestaurant) {
         MenuItem margherita = MockData.getMockMenuItem();
+        margherita.setRestaurantId(idRestaurant);
         return menuItemRepository.save(margherita);
     }
 }
