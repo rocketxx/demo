@@ -13,7 +13,15 @@ public class MenuItem {
     private String type;
     private List<Ingredient> ingredients;
     private String restaurantId;
+    private String imageUrl;
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     public String getRestaurantId() {
         return restaurantId;

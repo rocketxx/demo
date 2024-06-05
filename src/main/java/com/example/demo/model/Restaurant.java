@@ -16,6 +16,23 @@ public class Restaurant {
     private String phone;
     private Boolean active; //indica se è attivo o no
     private Boolean opened; //indica se il ristorante è aperto o chiuso
+    private String imageUrl; //indica se il ristorante è aperto o chiuso
+    private List<WorkingHours> workingHours;
+    public List<WorkingHours> getWorkingHours() {
+        return workingHours;
+    }
+
+    public void setWorkingHours(List<WorkingHours> workingHours) {
+        this.workingHours = workingHours;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     public Boolean getOpened() {
         return opened;
