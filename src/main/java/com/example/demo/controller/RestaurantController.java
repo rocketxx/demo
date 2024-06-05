@@ -40,6 +40,7 @@ public class RestaurantController {
         res.setPhone("4235346436546");
         res.setType("Pizza e Dolci");
         res.setActive(true);
+        res.setOpened(true);
         return restaurantRepository.save(res);
     }
 
@@ -51,6 +52,7 @@ public class RestaurantController {
             existingRestaurant.setName(restaurantDetails.getName());
             existingRestaurant.setAddress(restaurantDetails.getAddress());
             existingRestaurant.setPhone(restaurantDetails.getPhone());
+            existingRestaurant.setType(restaurantDetails.getType());
             existingRestaurant.setType(restaurantDetails.getType());
             return restaurantRepository.save(existingRestaurant);
         } else {
@@ -67,6 +69,20 @@ public class RestaurantController {
         if (optionalRestaurant.isPresent()) {
             Restaurant existingRestaurant = optionalRestaurant.get();
             existingRestaurant.setActive(!existingRestaurant.getActive()); //cambia lo stato di attivazione
+            return restaurantRepository.save(existingRestaurant);
+        } else {
+            // Handle the case where the restaurant is not found
+            // This can be customized based on your application's requirements
+            throw new Exception("Restaurant not found with id " + id);
+        }
+    }
+
+    @PutMapping("/opened/{id}")
+    public Restaurant openedRestaurant(@PathVariable String id) throws Exception {
+        Optional<Restaurant> optionalRestaurant = restaurantRepository.findById(id);
+        if (optionalRestaurant.isPresent()) {
+            Restaurant existingRestaurant = optionalRestaurant.get();
+            existingRestaurant.setOpened(!existingRestaurant.getOpened()); //cambia lo stato di attivazione
             return restaurantRepository.save(existingRestaurant);
         } else {
             // Handle the case where the restaurant is not found

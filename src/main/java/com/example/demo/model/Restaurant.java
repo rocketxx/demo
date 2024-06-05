@@ -14,8 +14,17 @@ public class Restaurant {
     private String type;
     private String address;
     private String phone;
-    private Boolean active;
-    
+    private Boolean active; //indica se è attivo o no
+    private Boolean opened; //indica se il ristorante è aperto o chiuso
+
+    public Boolean getOpened() {
+        return opened;
+    }
+
+    public void setOpened(Boolean opened) {
+        this.opened = opened;
+    }
+
     public Boolean getActive() {
         return active;
     }
