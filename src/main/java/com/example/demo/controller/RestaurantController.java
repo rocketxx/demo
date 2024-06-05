@@ -27,6 +27,19 @@ public class RestaurantController {
         return restaurantRepository.findAll(); 
     }
 
+    @GetMapping("/{id}")
+    public Restaurant getById(@PathVariable String id) throws Exception {
+        // return restaurantRepository.findAll(); 
+        Optional<Restaurant> optionalRestaurant = restaurantRepository.findById(id);
+        if (optionalRestaurant.isPresent()) {
+            return optionalRestaurant.get();
+        } else {
+            // Handle the case where the restaurant is not found
+            // This can be customized based on your application's requirements
+            throw new Exception("Restaurant not found with id " + id);
+        }
+    }
+
     @PostMapping("/create")
     public Restaurant createRestaurant(@RequestBody Restaurant restaurant) {
         return restaurantRepository.save(restaurant);
