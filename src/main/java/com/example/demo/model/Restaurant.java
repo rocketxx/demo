@@ -14,6 +14,16 @@ public class Restaurant {
     private String type;
     private String address;
     private String phone;
+    private Boolean active;
+    
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
     private List<MenuItem> menu;
 
     // Getters and setters
