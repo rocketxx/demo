@@ -17,11 +17,13 @@ public class Restaurant {
     private Boolean active; //indica se è attivo o no
     private Boolean opened; //indica se il ristorante è aperto o chiuso
     private String imageUrl; //indica se il ristorante è aperto o chiuso
+    private List<MenuItem> menu;
     private List<WorkingHours> workingHours;
+    // Getters and setters
     public List<WorkingHours> getWorkingHours() {
         return workingHours;
     }
-
+    
     public void setWorkingHours(List<WorkingHours> workingHours) {
         this.workingHours = workingHours;
     }
@@ -50,9 +52,6 @@ public class Restaurant {
         this.active = active;
     }
 
-    private List<MenuItem> menu;
-
-    // Getters and setters
 
     public String getId() {
         return id;
