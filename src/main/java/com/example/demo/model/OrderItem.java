@@ -9,8 +9,6 @@ public class OrderItem {
     private int quantity;
     private List<Ingredient> customizations; //qui i panini/pizze custom
     private MenuItem menuItem; //qui i menu standard predefiniti dal ristorante
-    //dovrebbe starci anche menuItem ?
-
     // Getters and setters
 
     public MenuItem getMenuItem() {

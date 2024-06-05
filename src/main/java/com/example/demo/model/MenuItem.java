@@ -4,16 +4,27 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 
+import com.example.demo.enumerator.ProductType;
+
 public class MenuItem {
     @Id
     private String id;
     private String name;
     private String description;
     private double price;
-    private String type;
+    private String type; //se è cibo o bevanda
     private List<Ingredient> ingredients;
     private String restaurantId;
     private String imageUrl;
+    private ProductType productType;
+
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
+    }
 
     public String getImageUrl() {
         return imageUrl;

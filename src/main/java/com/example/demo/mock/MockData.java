@@ -3,6 +3,7 @@ package com.example.demo.mock;
 import java.util.Arrays;
 import java.util.List;
 
+import com.example.demo.enumerator.ProductType;
 import com.example.demo.model.Ingredient;
 import com.example.demo.model.MenuItem;
 
@@ -43,6 +44,7 @@ public class MockData {
         margherita.setPrice(8.50);
         margherita.setType("Pizza");
         margherita.setIngredients(getMockIngredients());
+        margherita.setProductType(ProductType.FOOD_TYPE);
 
         return margherita;
     }
