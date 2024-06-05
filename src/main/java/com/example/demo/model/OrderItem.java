@@ -7,8 +7,8 @@ public class OrderItem {
 
     private String itemId;
     private int quantity;
-    private List<Ingredient> customizations;
-    private MenuItem menuItem;
+    private List<Ingredient> customizations; //qui i panini/pizze custom
+    private MenuItem menuItem; //qui i menu standard predefiniti dal ristorante
     //dovrebbe starci anche menuItem ?
 
     // Getters and setters

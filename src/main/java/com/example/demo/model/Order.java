@@ -15,7 +15,7 @@ public class Order {
     private List<OrderItem> items;
     private double totalPrice;
     private String deliveryAddress;
-    private String orderStatus;
+    private String orderStatus; 
     private Date orderDate;
 
     // Getters and setters
