@@ -8,12 +8,21 @@ public class Ingredient {
 
     @Id
     private String id;
+    private String restaurantId;
     private String name;
     private String type;
     private double price;
-
+    
     // Getters and setters
 
+    public String getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(String restaurantId) {
+        this.restaurantId = restaurantId;
+    }
+    
     public String getId() {
         return id;
     }
