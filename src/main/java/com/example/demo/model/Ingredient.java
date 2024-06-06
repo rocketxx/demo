@@ -12,8 +12,17 @@ public class Ingredient {
     private String name;
     private String type;
     private double price;
+    private boolean isActive = true; //se il prodotto è finito è possibile disattivarlo
     
     // Getters and setters
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
+    }
 
     public String getRestaurantId() {
         return restaurantId;

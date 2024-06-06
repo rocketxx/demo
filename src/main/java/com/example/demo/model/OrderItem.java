@@ -6,7 +6,7 @@ import java.util.List;
 public class OrderItem {
 
     private String itemId;
-    private int quantity;
+    private int quantity;                               
     private List<Ingredient> customizations; //qui i panini/pizze custom
     private MenuItem menuItem; //qui i menu standard predefiniti dal ristorante
     // Getters and setters
@@ -21,7 +21,7 @@ public class OrderItem {
 
     public String getItemId() {
         return itemId;
-    }
+    }                                    
 
     public void setItemId(String itemId) {
         this.itemId = itemId;
