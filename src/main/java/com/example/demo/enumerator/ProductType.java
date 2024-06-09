@@ -4,6 +4,7 @@ public enum ProductType {
         DRINK_TYPE
 }
 
+
 // drink,sauce,meat,topping
 
 // public enum MenuItemType

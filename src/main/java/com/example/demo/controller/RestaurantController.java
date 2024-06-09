@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.enumerator.RestaurantType;
 import com.example.demo.model.Restaurant;
 import com.example.demo.repository.RestaurantRepository;
 
@@ -48,12 +49,13 @@ public class RestaurantController {
     @PostMapping("/createMock")
     public Restaurant createMock() {
         Restaurant res = new Restaurant();
-        res.setAddress("via coppola 53");
-        res.setName("Pizze e dolci");
-        res.setPhone("4235346436546");
-        res.setType("Pizza e Dolci");
+        res.setAddress("via cappuccini 174");
+        res.setName("Willy Burger");
+        res.setPhone("3383831834");
+        res.setType(RestaurantType.BREAD);
         res.setActive(true);
         res.setOpened(true);
+        res.setImageUrl("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-tUn7mE2S4p8_xMP_pCYtfhsfeXMOO6FdVA&s");
         return restaurantRepository.save(res);
     }
 

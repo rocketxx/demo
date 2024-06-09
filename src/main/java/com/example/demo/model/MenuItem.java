@@ -12,7 +12,6 @@ public class MenuItem {
     private String name;
     private String description;
     private double price;
-    private String type; //se è cibo o bevanda
     private List<Ingredient> ingredients;
     private String restaurantId;
     private String imageUrl;
@@ -72,14 +71,6 @@ public class MenuItem {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public List<Ingredient> getIngredients() {

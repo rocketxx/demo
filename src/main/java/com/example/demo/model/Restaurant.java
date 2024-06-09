@@ -3,6 +3,9 @@ package com.example.demo.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.example.demo.enumerator.RestaurantType;
+
 import java.util.List;
 
 @Document(collection = "restaurants")
@@ -11,7 +14,7 @@ public class Restaurant {
     @Id
     private String id;
     private String name;
-    private String type;
+    private RestaurantType type;
     private String address;
     private String phone;
     private Boolean active; //indica se è attivo o no
@@ -69,11 +72,11 @@ public class Restaurant {
         this.name = name;
     }
 
-    public String getType() {
+    public RestaurantType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(RestaurantType type) {
         this.type = type;
     }
 

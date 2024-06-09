@@ -42,7 +42,6 @@ public class MockData {
         margherita.setName("Pizza Margherita");
         margherita.setDescription("Classic pizza with mozzarella, tomato sauce, basil, and olive oil");
         margherita.setPrice(8.50);
-        margherita.setType("Pizza");
         margherita.setIngredients(getMockIngredients());
         margherita.setProductType(ProductType.FOOD_TYPE);
 
