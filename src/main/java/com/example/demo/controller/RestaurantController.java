@@ -68,7 +68,6 @@ public class RestaurantController {
             existingRestaurant.setAddress(restaurantDetails.getAddress());
             existingRestaurant.setPhone(restaurantDetails.getPhone());
             existingRestaurant.setType(restaurantDetails.getType());
-            existingRestaurant.setType(restaurantDetails.getType());
             return restaurantRepository.save(existingRestaurant);
         } else {
             // Handle the case where the restaurant is not found
