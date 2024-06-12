@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,11 @@ public class IngredientController {
     @GetMapping("/all")
     public List<Ingredient> getAllIngredientss() {
         return ingredientsRepository.findAll(); 
+    }
+
+    @GetMapping("/by-id/{id}")
+    public Optional<Ingredient> getIngredientById(@PathVariable String id) {
+        return ingredientsRepository.findById(id); 
     }
 
     @GetMapping("/ingredients-by-restaurant/{restaurantId}")
