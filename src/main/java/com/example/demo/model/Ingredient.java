@@ -12,7 +12,7 @@ public class Ingredient {
     private String name;
     private String type;
     private double price;
-    private boolean isActive = true; //se il prodotto è finito è possibile disattivarlo
+    private boolean isActive; //se il prodotto è finito è possibile disattivarlo
     
     // Getters and setters
 
