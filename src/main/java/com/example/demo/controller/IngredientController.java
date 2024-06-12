@@ -5,9 +5,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,6 +56,24 @@ public class IngredientController {
         ingredient.setId(UUID.randomUUID().toString());
         return ingredientsRepository.save(ingredient);
     }
+
+    @PutMapping("/update/{id}")
+public ResponseEntity<Ingredient> updateIngredient(@PathVariable String id, @RequestBody Ingredient ingredientDetails) {
+    Optional<Ingredient> optionalIngredient = ingredientsRepository.findById(id);
+    if (!optionalIngredient.isPresent()) {
+        return ResponseEntity.notFound().build();
+    }
+
+    Ingredient existingIngredient = optionalIngredient.get();
+    existingIngredient.setName(ingredientDetails.getName());
+    existingIngredient.setActive(ingredientDetails.isActive());
+    existingIngredient.setType(ingredientDetails.getType());
+    existingIngredient.setPrice(ingredientDetails.getPrice());
+
+    Ingredient updatedIngredient = ingredientsRepository.save(existingIngredient);
+    return ResponseEntity.ok(updatedIngredient);
+}
+
 
     @PostMapping("/createMock")
     public Ingredient createMockIngredient() {
