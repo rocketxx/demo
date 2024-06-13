@@ -12,10 +12,12 @@ public class MenuItem {
     private String name;
     private String description;
     private double price;
-    private List<Ingredient> ingredients;
+    private List<Ingredient> ingredients; //questa lista è utile in caso di menu custom 
     private String restaurantId;
     private String imageUrl;
-    private ProductType productType;
+    private ProductType productType; 
+    //aggiungi le note
+    //attivo o meno
 
     public ProductType getProductType() {
         return productType;

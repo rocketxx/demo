@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,6 +31,7 @@ public class MenuItemController {
         
     @PostMapping("/create")
     public MenuItem createMenuItem(@RequestBody MenuItem MenuItem) {
+        MenuItem.setId(UUID.randomUUID().toString());
         return menuItemRepository.save(MenuItem);
     }
 
