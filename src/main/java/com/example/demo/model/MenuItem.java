@@ -16,8 +16,17 @@ public class MenuItem {
     private String restaurantId;
     private String imageUrl;
     private ProductType productType; 
+    private String type; 
     //aggiungi le note
     //attivo o meno
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public ProductType getProductType() {
         return productType;
