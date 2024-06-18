@@ -6,16 +6,20 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.mock.MockData;
+import com.example.demo.model.Ingredient;
 import com.example.demo.model.MenuItem;
+import com.example.demo.model.Restaurant;
 import com.example.demo.repository.MenuItemRepository;
 
 @RestController
@@ -27,6 +31,16 @@ public class MenuItemController {
     @GetMapping("/menu-by-restaurant/{restaurantId}")
     public List<MenuItem> getByRestaurantId(@PathVariable String restaurantId) {
         return menuItemRepository.findByRestaurantId(restaurantId);
+    }
+
+        @GetMapping("/{id}")
+    public MenuItem getById(@PathVariable String id) throws Exception {
+        Optional<MenuItem> optionalMenuItem = menuItemRepository.findById(id);
+        if (optionalMenuItem.isPresent()) {
+            return optionalMenuItem.get();
+        } else {
+            throw new Exception("Restaurant not found with id " + id);
+        }
     }
         
     @PostMapping("/create")
@@ -60,4 +74,20 @@ public class MenuItemController {
         margherita.setRestaurantId(idRestaurant);
         return menuItemRepository.save(margherita);
     }
+
+        @PutMapping("/update/{id}")
+public ResponseEntity<MenuItem> updateMenuItem(@PathVariable String id, @RequestBody MenuItem MenuItemDetails) {
+    Optional<MenuItem> optionalMenuItem = menuItemRepository.findById(id);
+    if (!optionalMenuItem.isPresent()) {
+        return ResponseEntity.notFound().build();
+    }
+
+    MenuItem existingMenuItem = optionalMenuItem.get();
+    existingMenuItem.setName(MenuItemDetails.getName());
+    existingMenuItem.setType(MenuItemDetails.getType());
+    existingMenuItem.setPrice(MenuItemDetails.getPrice());
+
+    MenuItem updatedMenuItem = menuItemRepository.save(existingMenuItem);
+    return ResponseEntity.ok(updatedMenuItem);
+}
 }
