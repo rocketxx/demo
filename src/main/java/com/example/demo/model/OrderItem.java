@@ -3,8 +3,10 @@ package com.example.demo.model;
 
 import java.util.List;
 
-public class OrderItem {
+import org.springframework.data.annotation.Id;
 
+public class OrderItem {
+    @Id
     private String itemId;
     private String restaurantId;
     private String userId;

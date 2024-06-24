@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,6 +29,7 @@ public class OrderItemController {
 
     @PostMapping("/create")
     public OrderItem createOrder(@RequestBody OrderItem order) {
+        order.setItemId(UUID.randomUUID().toString());
         return orderItemRepository.save(order);
     }
 
