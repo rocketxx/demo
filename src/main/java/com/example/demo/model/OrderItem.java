@@ -13,6 +13,15 @@ public class OrderItem {
     private int quantity;                               
     private List<Ingredient> customizations; //qui i panini/pizze custom
     private MenuItem menuItem; //qui i menu standard predefiniti dal ristorante
+    private String note;
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
     // Getters and setters
     public String getUserId() {
         return userId;
