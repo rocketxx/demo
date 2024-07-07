@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.model.MenuItem;
 import com.example.demo.model.OrderItem;
 import com.example.demo.repository.OrderItemRepository;
 
@@ -27,22 +28,32 @@ public class OrderItemController {
         return orderItemRepository.findByUserId(userId);
     }
 
+            @GetMapping("/{id}")
+    public OrderItem getById(@PathVariable String id) throws Exception {
+        Optional<OrderItem> optionalItem = orderItemRepository.findById(id);
+        if (optionalItem.isPresent()) {
+            return optionalItem.get();
+        } else {
+            throw new Exception("Order item not found with id " + id);
+        }
+    }
+
     @PostMapping("/create")
     public OrderItem createOrder(@RequestBody OrderItem order) {
         order.setItemId(UUID.randomUUID().toString());
         return orderItemRepository.save(order);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public String deleteOrderItem(@PathVariable String id) throws Exception {
-        Optional<OrderItem> optionalOrderItem = orderItemRepository.findById(id);
+    @DeleteMapping("/delete/{itemId}")
+    public String deleteOrderItem(@PathVariable String itemId) throws Exception {
+        Optional<OrderItem> optionalOrderItem = orderItemRepository.findById(itemId);
         if (optionalOrderItem.isPresent()) {
             orderItemRepository.delete(optionalOrderItem.get());
-            return "OrderItem deleted with id " + id;
+            return "OrderItem deleted with id " + itemId;
         } else {
             // Handle the case where the OrderItem is not found
             // This can be customized based on your application's requirements
-            throw new Exception("OrderItem not found with id " + id);
+            throw new Exception("OrderItem not found with id " + itemId);
         }
     }
 
