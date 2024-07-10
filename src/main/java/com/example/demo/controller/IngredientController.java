@@ -23,14 +23,15 @@ import com.example.demo.repository.IngredientRepository;
 public class IngredientController {
     @Autowired
     private IngredientRepository ingredientsRepository;
+
     @GetMapping("/all")
     public List<Ingredient> getAllIngredientss() {
-        return ingredientsRepository.findAll(); 
+        return ingredientsRepository.findAll();
     }
 
     @GetMapping("/by-id/{id}")
     public Optional<Ingredient> getIngredientById(@PathVariable String id) {
-        return ingredientsRepository.findById(id); 
+        return ingredientsRepository.findById(id);
     }
 
     @GetMapping("/ingredients-by-restaurant/{restaurantId}")
@@ -39,24 +40,18 @@ public class IngredientController {
     }
 
     @GetMapping("/ingredients-by-restaurant/{restaurantId}/{avaibleFor}")
-    public List<Ingredient> findIngredientsByRestaurantIdAndAvaibleFor(String restaurantId, AvaibleFor avaibleFor) {
+    public List<Ingredient> findIngredientsByRestaurantIdAndAvaibleFor(String restaurantId, String avaibleFor) {
         return ingredientsRepository.findByRestaurantIdAndAvaibleFor(restaurantId, avaibleFor);
     }
-//PAGINAZIONE
+    // PAGINAZIONE
     // @GetMapping("/all")
-    // public Page<Ingredient> getAllIngredients(@RequestParam(defaultValue = "0") int page,
-    //                                           @RequestParam(defaultValue = "10") int size) {
-    //     Pageable pageable = PageRequest.of(page, size);
-    //     return ingredientsRepository.findAll(pageable);
+    // public Page<Ingredient> getAllIngredients(@RequestParam(defaultValue = "0")
+    // int page,
+    // @RequestParam(defaultValue = "10") int size) {
+    // Pageable pageable = PageRequest.of(page, size);
+    // return ingredientsRepository.findAll(pageable);
     // }
 
-
-    // curl -X POST http://localhost:8080/ingredients/create -H "Content-Type: application/json" -d '{
-    //     "name": "Tomato",
-    //     "type": "Vegetable",
-    //     "price": 0.5
-    // }'
-    
     @PostMapping("/create")
     public Ingredient createIngredient(@RequestBody Ingredient ingredient) {
         ingredient.setId(UUID.randomUUID().toString());
@@ -64,23 +59,23 @@ public class IngredientController {
     }
 
     @PutMapping("/update/{id}")
-public ResponseEntity<Ingredient> updateIngredient(@PathVariable String id, @RequestBody Ingredient ingredientDetails) {
-    Optional<Ingredient> optionalIngredient = ingredientsRepository.findById(id);
-    if (!optionalIngredient.isPresent()) {
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<Ingredient> updateIngredient(@PathVariable String id,
+            @RequestBody Ingredient ingredientDetails) {
+        Optional<Ingredient> optionalIngredient = ingredientsRepository.findById(id);
+        if (!optionalIngredient.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Ingredient existingIngredient = optionalIngredient.get();
+        existingIngredient.setName(ingredientDetails.getName());
+        existingIngredient.setActive(ingredientDetails.isActive());
+        existingIngredient.setType(ingredientDetails.getType());
+        existingIngredient.setPrice(ingredientDetails.getPrice());
+        existingIngredient.setAvaibleFor(ingredientDetails.getAvaibleFor());
+
+        Ingredient updatedIngredient = ingredientsRepository.save(existingIngredient);
+        return ResponseEntity.ok(updatedIngredient);
     }
-
-    Ingredient existingIngredient = optionalIngredient.get();
-    existingIngredient.setName(ingredientDetails.getName());
-    existingIngredient.setActive(ingredientDetails.isActive());
-    existingIngredient.setType(ingredientDetails.getType());
-    existingIngredient.setPrice(ingredientDetails.getPrice());
-    existingIngredient.setAvaibleFor(ingredientDetails.getAvaibleFor());
-
-    Ingredient updatedIngredient = ingredientsRepository.save(existingIngredient);
-    return ResponseEntity.ok(updatedIngredient);
-}
-
 
     @PostMapping("/createMock")
     public Ingredient createMockIngredient() {
@@ -91,7 +86,5 @@ public ResponseEntity<Ingredient> updateIngredient(@PathVariable String id, @Req
         ingredient.setType("nessuno");
         return ingredientsRepository.save(ingredient);
     }
-    
-
 
 }
