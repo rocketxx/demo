@@ -3,6 +3,8 @@ package com.example.demo.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.example.demo.enumerator.AvaibleFor;
+
 @Document(collection = "ingredients")
 public class Ingredient {
 
@@ -13,8 +15,17 @@ public class Ingredient {
     private String type;
     private double price;
     private boolean isActive; //se il prodotto è finito è possibile disattivarlo
+    private AvaibleFor avaibleFor;
     
     // Getters and setters
+
+    public AvaibleFor getAvaibleFor() {
+        return avaibleFor;
+    }
+
+    public void setAvaibleFor(AvaibleFor avaibleFor) {
+        this.avaibleFor = avaibleFor;
+    }
 
     public boolean isActive() {
         return isActive;

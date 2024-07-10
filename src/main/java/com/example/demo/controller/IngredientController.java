@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.enumerator.AvaibleFor;
 import com.example.demo.model.Ingredient;
 import com.example.demo.repository.IngredientRepository;
 
@@ -35,6 +36,11 @@ public class IngredientController {
     @GetMapping("/ingredients-by-restaurant/{restaurantId}")
     public List<Ingredient> getIngredientsByRestaurantIdOrNull(@PathVariable String restaurantId) {
         return ingredientsRepository.findByRestaurantIdOrRestaurantIdIsNull(restaurantId);
+    }
+
+    @GetMapping("/ingredients-by-restaurant/{restaurantId}/{avaibleFor}")
+    public List<Ingredient> findIngredientsByRestaurantIdAndAvaibleFor(String restaurantId, AvaibleFor avaibleFor) {
+        return ingredientsRepository.findByRestaurantIdAndAvaibleFor(restaurantId, avaibleFor);
     }
 //PAGINAZIONE
     // @GetMapping("/all")
@@ -69,6 +75,7 @@ public ResponseEntity<Ingredient> updateIngredient(@PathVariable String id, @Req
     existingIngredient.setActive(ingredientDetails.isActive());
     existingIngredient.setType(ingredientDetails.getType());
     existingIngredient.setPrice(ingredientDetails.getPrice());
+    existingIngredient.setAvaibleFor(ingredientDetails.getAvaibleFor());
 
     Ingredient updatedIngredient = ingredientsRepository.save(existingIngredient);
     return ResponseEntity.ok(updatedIngredient);
