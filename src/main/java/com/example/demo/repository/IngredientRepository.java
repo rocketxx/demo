@@ -8,7 +8,6 @@ import com.example.demo.model.Ingredient;
 
 @Repository
 public interface IngredientRepository extends MongoRepository<Ingredient, String> {
-    // Puoi aggiungere metodi di query personalizzati qui, se necessario
     List<Ingredient> findByRestaurantIdOrRestaurantIdIsNull(String restaurantId);
 
     @Query("{ 'restaurantId' : ?0, 'avaibleFor' : ?1 }")

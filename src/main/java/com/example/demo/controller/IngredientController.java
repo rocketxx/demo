@@ -40,7 +40,7 @@ public class IngredientController {
     }
 
     @GetMapping("/ingredients-by-restaurant/{restaurantId}/{avaibleFor}")
-    public List<Ingredient> findIngredientsByRestaurantIdAndAvaibleFor(String restaurantId, String avaibleFor) {
+    public List<Ingredient> findIngredientsByRestaurantIdAndAvaibleFor(@PathVariable String restaurantId, @PathVariable String avaibleFor) {
         return ingredientsRepository.findByRestaurantIdAndAvaibleFor(restaurantId, avaibleFor);
     }
     // PAGINAZIONE
