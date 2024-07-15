@@ -1,17 +1,17 @@
 package com.example.demo.model;
 
 public class FilterItem {
-    private String nome;
+    private String name;
     private boolean isActive;
     private String restaurantId;
 
-    // Getter and Setter for nome
-    public String getNome() {
-        return nome;
+    // Getter and Setter for name
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     // Getter and Setter for isActive
