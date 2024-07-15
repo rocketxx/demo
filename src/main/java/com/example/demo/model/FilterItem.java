@@ -3,7 +3,7 @@ package com.example.demo.model;
 public class FilterItem {
     private String nome;
     private boolean isActive;
-    private int restaurantId;
+    private String restaurantId;
 
     // Getter and Setter for nome
     public String getNome() {
@@ -24,11 +24,11 @@ public class FilterItem {
     }
 
     // Getter and Setter for restaurantId
-    public int getRestaurantId() {
+    public String getRestaurantId() {
         return restaurantId;
     }
 
-    public void setRestaurantId(int restaurantId) {
+    public void setRestaurantId(String restaurantId) {
         this.restaurantId = restaurantId;
     }
 }
