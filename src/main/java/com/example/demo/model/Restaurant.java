@@ -22,6 +22,15 @@ public class Restaurant {
     private String imageUrl; //indica se il ristorante è aperto o chiuso
     private List<MenuItem> menu;
     private List<WorkingHours> workingHours;
+    private List<FilterItem> filterItems; // sarebbero gli item attivi disponibili: pizze,bevande,panini,insalate
+    public List<FilterItem> getFilterItems() {
+        return filterItems;
+    }
+
+    public void setFilterItems(List<FilterItem> filterItems) {
+        this.filterItems = filterItems;
+    }
+
     // Getters and setters
     public List<WorkingHours> getWorkingHours() {
         return workingHours;

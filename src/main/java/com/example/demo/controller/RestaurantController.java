@@ -130,6 +130,7 @@ public class RestaurantController {
             existingRestaurant.setPhone(restaurantDetails.getPhone());
             existingRestaurant.setType(restaurantDetails.getType());
             existingRestaurant.setWorkingHours(restaurantDetails.getWorkingHours());
+            existingRestaurant.setFilterItems(restaurantDetails.getFilterItems());
             return restaurantRepository.save(existingRestaurant);
         } else {
             // Handle the case where the restaurant is not found
