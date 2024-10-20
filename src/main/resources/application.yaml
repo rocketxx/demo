@@ -1,0 +1,15 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: siciliagnam
+  profiles:
+    active:
+      - default
+  data:
+    mongodb:
+      uri: mongodb://root:password@localhost:27017/siciliagnam?authSource=admin
+  # per la serializzazione di oggetti vuoti
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
