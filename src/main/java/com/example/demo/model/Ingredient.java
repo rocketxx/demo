@@ -3,11 +3,10 @@ package com.example.demo.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "ingredients")
-public class Ingredient {
+import com.example.demo.model.common.BaseEntity;
 
-    @Id
-    private String id;
+@Document(collection = "ingredients")
+public class Ingredient extends BaseEntity {
     private String restaurantId;
     private String name;
     private String type;
@@ -41,14 +40,6 @@ public class Ingredient {
         this.restaurantId = restaurantId;
     }
     
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }

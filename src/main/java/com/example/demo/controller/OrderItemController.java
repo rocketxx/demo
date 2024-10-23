@@ -60,7 +60,7 @@ public ResponseEntity<OrderItem> update(@PathVariable String id, @RequestBody Or
 
     @PostMapping("/create")
     public OrderItem createOrder(@RequestBody OrderItem order) {
-        order.setItemId(UUID.randomUUID().toString());
+        // order.setItemId(UUID.randomUUID().toString());
         return orderItemRepository.save(order);
     }
 

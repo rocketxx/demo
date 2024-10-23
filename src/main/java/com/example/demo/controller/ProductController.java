@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.product;
+import com.example.demo.model.Product;
 import com.example.demo.repository.ProductRepository;
 
 @RestController
@@ -23,18 +23,18 @@ public class ProductController
     private ProductRepository productRepository;
 
     @GetMapping("/all")
-    public List<product> getAllProducts() {
+    public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
     @PostMapping("/test")
-    public product createTestProduct() {
-        product product = new product("Descrizione del prodotto di test", "ciao");
+    public Product createTestProduct() {
+        Product product = new Product("Descrizione del prodotto di test", "ciao");
         return productRepository.save(product);
     }
 
     @GetMapping("/findByCode/{code}")
     public ResponseEntity<?> getProductByCode(@PathVariable String code) {
-        product product = productRepository.findByCode(code);
+        Product product = productRepository.findByCode(code);
         if (product != null) {
             return new ResponseEntity<>(product, HttpStatus.OK);
         } else {

@@ -3,12 +3,13 @@ package com.example.demo.model;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.example.demo.enumerator.ProductType;
+import com.example.demo.model.common.BaseEntity;
 
-public class MenuItem {
-    @Id
-    private String id;
+@Document
+public class MenuItem extends BaseEntity{
     private String name;
     private String description;
     private double price;
@@ -53,13 +54,6 @@ public class MenuItem {
     }
 
     // Getters and setters
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
     public String getName() {
         return name;
     }

@@ -54,7 +54,7 @@ public class IngredientController {
 
     @PostMapping("/create")
     public Ingredient createIngredient(@RequestBody Ingredient ingredient) {
-        ingredient.setId(UUID.randomUUID().toString());
+        // ingredient.setId(UUID.randomUUID().toString());
         return ingredientsRepository.save(ingredient);
     }
 

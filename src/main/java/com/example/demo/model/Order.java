@@ -2,14 +2,14 @@ package com.example.demo.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.example.demo.model.common.BaseEntity;
+
 import java.util.Date;
 import java.util.List;
 
 @Document(collection = "orders")
-public class Order {
-
-    @Id
-    private String id;
+public class Order extends BaseEntity {
     private String userId;
     private String restaurantId;
     private List<OrderItem> items;
@@ -19,14 +19,6 @@ public class Order {
     private Date orderDate;
 
     // Getters and setters
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getUserId() {
         return userId;

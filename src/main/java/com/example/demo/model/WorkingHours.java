@@ -2,7 +2,12 @@ package com.example.demo.model;
 import java.time.LocalTime;
 import java.util.List;
 
-public class WorkingHours {
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.example.demo.model.common.BaseEntity;
+
+@Document
+public class WorkingHours extends BaseEntity {
     private String dayOfWeek; // "Monday", "Tuesday", etc.
     private LocalTime openingTime;
     private LocalTime closingTime;

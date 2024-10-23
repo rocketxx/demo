@@ -4,10 +4,12 @@ package com.example.demo.model;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-public class OrderItem {
-    @Id
-    private String itemId;
+import com.example.demo.model.common.BaseEntity;
+
+@Document
+public class OrderItem extends BaseEntity {
     private String restaurantId;
     private String userId;
     private int quantity;                               
@@ -52,14 +54,6 @@ public class OrderItem {
 
     public void setMenuItem(MenuItem menuItem) {
         this.menuItem = menuItem;
-    }
-
-    public String getItemId() {
-        return itemId;
-    }                                    
-
-    public void setItemId(String itemId) {
-        this.itemId = itemId;
     }
 
     public int getQuantity() {

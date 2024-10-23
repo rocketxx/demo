@@ -5,14 +5,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.example.demo.enumerator.RestaurantType;
+import com.example.demo.model.common.BaseEntity;
 
 import java.util.List;
 
 @Document(collection = "restaurants")
-public class Restaurant {
+public class Restaurant extends BaseEntity {
 
-    @Id
-    private String id;
     private String name;
     private RestaurantType type;
     private String address;
@@ -62,15 +61,6 @@ public class Restaurant {
 
     public void setActive(Boolean active) {
         this.active = active;
-    }
-
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {

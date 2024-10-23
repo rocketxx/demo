@@ -1,14 +1,17 @@
 package com.example.demo.model;
 
-public class Address {
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.example.demo.model.common.BaseEntity;
+
+@Document
+public class Address extends BaseEntity {
     private String street;
     private String city;
     private String state;
     private String postalCode;
 
     // Getters and setters
-
     public String getStreet() {
         return street;
     }

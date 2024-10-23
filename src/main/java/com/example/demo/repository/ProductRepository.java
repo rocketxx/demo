@@ -1,9 +1,11 @@
 package com.example.demo.repository;
 
+import java.util.UUID;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.example.demo.model.product;
+import com.example.demo.model.Product;
 
-public interface ProductRepository extends MongoRepository<product, String> {
-    product findByCode(String code);
+public interface ProductRepository extends MongoRepository<Product, UUID> {
+    Product findByCode(String code);
 }

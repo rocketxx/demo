@@ -45,7 +45,7 @@ public class MenuItemController {
         
     @PostMapping("/create")
     public MenuItem createMenuItem(@RequestBody MenuItem MenuItem) {
-        MenuItem.setId(UUID.randomUUID().toString());
+        // MenuItem.setId(UUID.randomUUID().toString());
         return menuItemRepository.save(MenuItem);
     }
 
