@@ -17,6 +17,7 @@ import java.io.ByteArrayOutputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.*;
@@ -74,38 +75,54 @@ public class PdfEmailController {
 
         mailSender.send(message);
     }
-
-    @PostMapping("/create-pdf-order")
-    public ResponseEntity<byte[]> createPdfOrder() {
-        // Creazione del documento PDF
-        Document document = new Document();
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+    @PostMapping("/send-email")
+    public ResponseEntity<String> sendEmail(@RequestParam String recipient, @RequestParam String body) {
+        String subject = "TEST EMAIL";
 
         try {
-            // Creazione del writer per il documento
-            PdfWriter.getInstance(document, byteArrayOutputStream);
-            document.open();
-
-            // Aggiunta del titolo
-            Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18);
-            Paragraph title = new Paragraph("Ordine", titleFont);
-            title.setAlignment(Paragraph.ALIGN_CENTER);
-            document.add(title);
-
-            // Aggiunta di uno spazio vuoto
-            document.add(new Paragraph(" "));
-
-            // Aggiunta del paragrafo
-            Font contentFont = FontFactory.getFont(FontFactory.HELVETICA, 12);
-            Paragraph content = new Paragraph("Panino con patatine, maionese e salsa rosa", contentFont);
-            content.setAlignment(Paragraph.ALIGN_LEFT);
-            document.add(content);
-
-            document.close();
-        } catch (DocumentException e) {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(recipient);
+            message.setSubject(subject);
+            message.setText(body);
+            mailSender.send(message);
+            return ResponseEntity.ok("Email inviata con successo a " + recipient);
+        } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(500).body(null); // Risposta in caso di errore
+            return ResponseEntity.status(500).body("Errore durante l'invio dell'email");
         }
+    }
+
+        @PostMapping("/create-pdf-order")
+        public ResponseEntity<byte[]> createPdfOrder() {
+            // Creazione del documento PDF
+            Document document = new Document();
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+            try {
+                // Creazione del writer per il documento
+                PdfWriter.getInstance(document, byteArrayOutputStream);
+                document.open();
+
+                // Aggiunta del titolo
+                Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18);
+                Paragraph title = new Paragraph("Ordine", titleFont);
+                title.setAlignment(Paragraph.ALIGN_CENTER);
+                document.add(title);
+
+                // Aggiunta di uno spazio vuoto
+                document.add(new Paragraph(" "));
+
+                // Aggiunta del paragrafo
+                Font contentFont = FontFactory.getFont(FontFactory.HELVETICA, 12);
+                Paragraph content = new Paragraph("Panino con patatine, maionese e salsa rosa", contentFont);
+                content.setAlignment(Paragraph.ALIGN_LEFT);
+                document.add(content);
+
+                document.close();
+            } catch (DocumentException e) {
+                e.printStackTrace();
+                return ResponseEntity.status(500).body(null); // Risposta in caso di errore
+            }
 
         // Conversione del documento in array di byte
         byte[] pdfBytes = byteArrayOutputStream.toByteArray();
