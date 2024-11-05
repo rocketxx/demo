@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Order;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
@@ -99,6 +100,55 @@ public class PdfEmailController {
             Paragraph content = new Paragraph("Panino con patatine, maionese e salsa rosa", contentFont);
             content.setAlignment(Paragraph.ALIGN_LEFT);
             document.add(content);
+
+            document.close();
+        } catch (DocumentException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(null); // Risposta in caso di errore
+        }
+
+        // Conversione del documento in array di byte
+        byte[] pdfBytes = byteArrayOutputStream.toByteArray();
+
+        // Creazione della risposta con il PDF generato
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "ordine.pdf");
+        headers.setContentLength(pdfBytes.length);
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(pdfBytes);
+    }
+
+    @PostMapping("/create-pdf-with-input-order")
+    public ResponseEntity<byte[]> createPdfOrderFromOrderEntity(@RequestBody Order order) {
+        // Creazione del documento PDF
+        Document document = new Document();
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+        try {
+            // Creazione del writer per il documento
+            PdfWriter.getInstance(document, byteArrayOutputStream);
+            document.open();
+
+            // Aggiunta del titolo
+            Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18);
+            Paragraph title = new Paragraph("Ordine", titleFont);
+            title.setAlignment(Paragraph.ALIGN_CENTER);
+            document.add(title);
+
+            // Aggiunta di uno spazio vuoto
+            document.add(new Paragraph(" "));
+
+            // Aggiunta del paragrafo
+            Font contentFont = FontFactory.getFont(FontFactory.HELVETICA, 12);
+            Paragraph content = new Paragraph( "Da inviare in: "+ order.getDeliveryAddress(), contentFont);
+            Paragraph content2 = new Paragraph( "Totale: "+ order.getTotalPrice(), contentFont);
+            // Paragraph content = new Paragraph(order.getItems().get(0).getNote(), contentFont);
+            content.setAlignment(Paragraph.ALIGN_LEFT);
+            document.add(content);
+            document.add(content2);
 
             document.close();
         } catch (DocumentException e) {
