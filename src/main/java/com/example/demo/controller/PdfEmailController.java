@@ -2,8 +2,18 @@ package com.example.demo.controller;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.PdfDocument;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+
+import java.io.ByteArrayOutputStream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -12,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.util.Map;
 
 @RestController
@@ -26,10 +36,7 @@ public class PdfEmailController {
     public String sendPdfEmail(@RequestBody Map<String, Object> jsonData, 
                                @RequestParam String recipientEmail) {
         try {
-            // Genera il PDF
             byte[] pdfBytes = generatePdf(jsonData);
-
-            // Invia l'email con il PDF come allegato
             sendEmailWithAttachment(recipientEmail, pdfBytes);
 
             return "Email inviata con successo";
@@ -39,24 +46,17 @@ public class PdfEmailController {
         }
     }
 
-    private byte[] generatePdf(Map<String, Object> jsonData) throws DocumentException {
-        // Usa un ByteArrayOutputStream per generare il PDF in memoria
+    private byte[] generatePdf(Map<String, Object> jsonData) throws FileNotFoundException, DocumentException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        // PdfWriter writer = new PdfWriter(null, outputStream);
+        PdfDocument pdf = new PdfDocument();
         Document document = new Document();
-        PdfWriter.getInstance(document, outputStream);
 
-        // Apre il documento per scrivere contenuti
-        document.open();
-        
-        // Creazione del contenuto PDF dal JSON
         for (Map.Entry<String, Object> entry : jsonData.entrySet()) {
             document.add(new Paragraph(entry.getKey() + ": " + entry.getValue().toString()));
         }
 
-        // Chiudi il documento
         document.close();
-        
-        // Ritorna il contenuto del PDF come array di byte
         return outputStream.toByteArray();
     }
 
@@ -64,16 +64,59 @@ public class PdfEmailController {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-        // Configura i dettagli dell'email
         helper.setTo(recipientEmail);
         helper.setSubject("Ecco il PDF generato");
         helper.setText("In allegato trovi il PDF generato a partire dal JSON fornito.");
 
-        // Allegato come risorsa in memoria
         ByteArrayResource pdfResource = new ByteArrayResource(pdfBytes);
         helper.addAttachment("documento.pdf", pdfResource);
 
-        // Invia l'email
         mailSender.send(message);
+    }
+
+    @PostMapping("/create-pdf-order")
+    public ResponseEntity<byte[]> createPdfOrder() {
+        // Creazione del documento PDF
+        Document document = new Document();
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+        try {
+            // Creazione del writer per il documento
+            PdfWriter.getInstance(document, byteArrayOutputStream);
+            document.open();
+
+            // Aggiunta del titolo
+            Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18);
+            Paragraph title = new Paragraph("Ordine", titleFont);
+            title.setAlignment(Paragraph.ALIGN_CENTER);
+            document.add(title);
+
+            // Aggiunta di uno spazio vuoto
+            document.add(new Paragraph(" "));
+
+            // Aggiunta del paragrafo
+            Font contentFont = FontFactory.getFont(FontFactory.HELVETICA, 12);
+            Paragraph content = new Paragraph("Panino con patatine, maionese e salsa rosa", contentFont);
+            content.setAlignment(Paragraph.ALIGN_LEFT);
+            document.add(content);
+
+            document.close();
+        } catch (DocumentException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(null); // Risposta in caso di errore
+        }
+
+        // Conversione del documento in array di byte
+        byte[] pdfBytes = byteArrayOutputStream.toByteArray();
+
+        // Creazione della risposta con il PDF generato
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "ordine.pdf");
+        headers.setContentLength(pdfBytes.length);
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(pdfBytes);
     }
 }
