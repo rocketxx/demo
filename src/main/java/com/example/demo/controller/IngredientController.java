@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.enumerator.AvaibleFor;
 import com.example.demo.model.Ingredient;
 import com.example.demo.repository.IngredientRepository;
 
@@ -30,7 +29,7 @@ public class IngredientController {
     }
 
     @GetMapping("/by-id/{id}")
-    public Optional<Ingredient> getIngredientById(@PathVariable String id) {
+    public Optional<Ingredient> getIngredientById(@PathVariable UUID id) {
         return ingredientsRepository.findById(id);
     }
 
@@ -59,7 +58,7 @@ public class IngredientController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Ingredient> updateIngredient(@PathVariable String id,
+    public ResponseEntity<Ingredient> updateIngredient(@PathVariable UUID id,
             @RequestBody Ingredient ingredientDetails) {
         Optional<Ingredient> optionalIngredient = ingredientsRepository.findById(id);
         if (!optionalIngredient.isPresent()) {
@@ -67,24 +66,24 @@ public class IngredientController {
         }
 
         Ingredient existingIngredient = optionalIngredient.get();
-        existingIngredient.setName(ingredientDetails.getName());
-        existingIngredient.setActive(ingredientDetails.isActive());
-        existingIngredient.setType(ingredientDetails.getType());
-        existingIngredient.setPrice(ingredientDetails.getPrice());
-        existingIngredient.setAvaibleFor(ingredientDetails.getAvaibleFor());
+                    existingIngredient.setName(ingredientDetails.getName());
+                    existingIngredient.setEnabled(ingredientDetails.isEnabled());
+                    existingIngredient.setType(ingredientDetails.getType());
+                    existingIngredient.setPrice(ingredientDetails.getPrice());
+                    existingIngredient.setAvaibleFor(ingredientDetails.getAvaibleFor());
 
         Ingredient updatedIngredient = ingredientsRepository.save(existingIngredient);
         return ResponseEntity.ok(updatedIngredient);
     }
 
-    @PostMapping("/createMock")
-    public Ingredient createMockIngredient() {
-        Ingredient ingredient = new Ingredient();
-        ingredient.setRestaurantId(null);
-        ingredient.setName("test 2null");
-        ingredient.setPrice(0.80);
-        ingredient.setType("nessuno");
-        return ingredientsRepository.save(ingredient);
-    }
+    // @PostMapping("/createMock")
+    // public Ingredient createMockIngredient() {
+    //     Ingredient ingredient = new Ingredient();
+    //     ingredient.setRestaurantId(null);
+    //     ingredient.setName("test 2null");
+    //     ingredient.setPrice(0.80);
+    //     ingredient.setType("nessuno");
+    //     return ingredientsRepository.save(ingredient);
+    // }
 
 }

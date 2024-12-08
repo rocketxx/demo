@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.mock.MockData;
-import com.example.demo.model.Ingredient;
 import com.example.demo.model.MenuItem;
-import com.example.demo.model.Restaurant;
 import com.example.demo.repository.MenuItemRepository;
 
 @RestController
@@ -34,7 +32,7 @@ public class MenuItemController {
     }
 
         @GetMapping("/{id}")
-    public MenuItem getById(@PathVariable String id) throws Exception {
+    public MenuItem getById(@PathVariable UUID id) throws Exception {
         Optional<MenuItem> optionalMenuItem = menuItemRepository.findById(id);
         if (optionalMenuItem.isPresent()) {
             return optionalMenuItem.get();
@@ -50,7 +48,7 @@ public class MenuItemController {
     }
 
     @DeleteMapping("/{id}")
-    public MenuItem delete(@PathVariable String id) {
+    public MenuItem delete(@PathVariable UUID id) {
         // Trova il MenuItem con l'ID specificato
         Optional<MenuItem> menuItemOptional = menuItemRepository.findById(id);
 
@@ -58,7 +56,7 @@ public class MenuItemController {
         if (menuItemOptional.isPresent()) {
             // Se esiste, elimina il MenuItem dal repository
             MenuItem menuItem = menuItemOptional.get();
-            menuItemRepository.deleteById(id);
+                     menuItemRepository.deleteById(id);
             // Restituisci il MenuItem eliminato
             return menuItem;
         } else {
@@ -76,7 +74,7 @@ public class MenuItemController {
     }
 
         @PutMapping("/update/{id}")
-public ResponseEntity<MenuItem> updateMenuItem(@PathVariable String id, @RequestBody MenuItem MenuItemDetails) {
+public ResponseEntity<MenuItem> updateMenuItem(@PathVariable UUID id, @RequestBody MenuItem MenuItemDetails) {
     Optional<MenuItem> optionalMenuItem = menuItemRepository.findById(id);
     if (!optionalMenuItem.isPresent()) {
         return ResponseEntity.notFound().build();

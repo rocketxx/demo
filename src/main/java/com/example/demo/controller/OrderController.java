@@ -14,6 +14,8 @@ import com.example.demo.mock.MockData;
 import com.example.demo.model.MenuItem;
 import com.example.demo.model.Order;
 import com.example.demo.model.OrderItem;
+import com.example.demo.model.Restaurant;
+import com.example.demo.model.User;
 import com.example.demo.repository.OrderRepository;
 
 @RestController
@@ -41,9 +43,11 @@ public class OrderController {
         orderItem.setMenuItem(margherita);
         orderItemList.add(orderItem);
         order.setItems(orderItemList);
-        order.setRestaurantId("333344444");
-        order.setTotalPrice(order.getTotalPrice());
-        order.setUserId("5555577777");
+        order.setRestaurant(new Restaurant());
+        // order.setRestaurantId("333344444");
+        order.setPrice(order.getPrice());
+        // order.setUserId("5555577777");
+        order.setUser(new User());
         return orderRepository.save(order);
     }
 }

@@ -3,72 +3,22 @@ package com.example.demo.model;
 
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.example.demo.model.common.BaseEntity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Document
+@Getter
+@Setter
 public class OrderItem extends BaseEntity {
-    private String restaurantId;
-    private String userId;
-    private int quantity;                               
-    private List<Ingredient> customizations; //qui i panini/pizze custom
-    private MenuItem menuItem; //qui i menu standard predefiniti dal ristorante
+    private List<Ingredient> ingredients; //qui i panini/pizze custom
+    private int quantity;
     private String note;
-    private String type; 
-    public String getType() {
-        return type;
-    }
+    private String type;
+    private String userId;  //ordini di un utente
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    // Getters and setters
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-    public String getRestaurantId() {
-        return restaurantId;
-    }
-
-    public void setRestaurantId(String restaurantId) {
-        this.restaurantId = restaurantId;
-    }
-    public MenuItem getMenuItem() {
-        return menuItem;
-    }
-
-    public void setMenuItem(MenuItem menuItem) {
-        this.menuItem = menuItem;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public List<Ingredient> getCustomizations() {
-        return customizations;
-    }
-
-    public void setCustomizations(List<Ingredient> customizations) {
-        this.customizations = customizations;
-    }
+    private MenuItem menuItem; //qui i menu standard predefiniti dal ristorante //?
 }

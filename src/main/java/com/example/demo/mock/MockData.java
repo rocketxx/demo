@@ -15,25 +15,25 @@ public class MockData {
         mozzarella.setId(UUID.fromString("1"));
         mozzarella.setName("Mozzarella");
         mozzarella.setType("Cheese");
-        mozzarella.setPrice(0.50);
+        mozzarella.setPrice(0.50F);
 
         Ingredient tomatoSauce = new Ingredient();
         tomatoSauce.setId(UUID.fromString("2"));
         tomatoSauce.setName("Tomato Sauce");
         tomatoSauce.setType("Sauce");
-        tomatoSauce.setPrice(0.30);
+        tomatoSauce.setPrice(0.30F);
 
         Ingredient basil = new Ingredient();
         basil.setId(UUID.fromString("3"));
         basil.setName("Basil");
         basil.setType("Herb");
-        basil.setPrice(0.10);
+        basil.setPrice(0.10F);
 
         Ingredient oliveOil = new Ingredient();
         oliveOil.setId(UUID.fromString("4"));
         oliveOil.setName("Olive Oil");
         oliveOil.setType("Oil");
-        oliveOil.setPrice(0.20);
+        oliveOil.setPrice(0.20F);
 
         return Arrays.asList(mozzarella, tomatoSauce, basil, oliveOil);
     }
@@ -42,7 +42,7 @@ public class MockData {
         MenuItem margherita = new MenuItem();
         margherita.setName("Pizza Margherita");
         margherita.setDescription("Classic pizza with mozzarella, tomato sauce, basil, and olive oil");
-        margherita.setPrice(8.50);
+        margherita.setPrice(8.50F);
         margherita.setIngredients(getMockIngredients());
         margherita.setProductType(ProductType.FOOD_TYPE);
 
