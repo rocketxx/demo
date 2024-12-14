@@ -21,4 +21,6 @@ public class User extends BaseEntityImageOptions {
     
     /* Only user can modify his contacts */
     private List<Contact> contacts;
+    /* Only user can modify his addresses */
+    private List<Address> addresses;
 }
