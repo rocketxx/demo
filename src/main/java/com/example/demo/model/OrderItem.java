@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import com.example.demo.model.common.BaseEntity;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +14,7 @@ import lombok.Setter;
  * */
 @Getter
 @Setter
-public class OrderItem {
+public class OrderItem extends BaseEntity {
     /* Quantity selected */
     private int quantity;
     /* Note added */

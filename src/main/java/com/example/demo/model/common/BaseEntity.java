@@ -16,6 +16,7 @@ public class BaseEntity {
     @CreatedDate        private Instant createdAt;
     @LastModifiedDate   private Instant updatedAt;
                         private String  tenantId;
+                        /* Il concetto di abilita/disabilita assume il suo significato sempre nel contesto specifico */
                         private boolean enabled = false;
     public BaseEntity(){}
 }

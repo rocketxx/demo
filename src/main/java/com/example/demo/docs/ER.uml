@@ -3,6 +3,7 @@
 entity User {
     * id : UUID
     * contacts : List<Contact>
+    * addresses : List<Address>
 }
 entity Restaurant {
     * id : UUID
@@ -33,11 +34,13 @@ class Address <<nested>>{
 class Category {
     * id : UUID
 }
-
 class WorkingHour <<nested>> {
     * id : UUID
 }
 class Tag {
+    * id : UUID
+}
+class Type {
     * id : UUID
 }
 class CategoriesPerRestaurants {
@@ -65,5 +68,7 @@ Product                  ||--o{ IngredientsPerProducts  : "N-1"
 
 TagsPerIngredients       ||--o{ Ingredient              : "1-N"
 Tag                      ||--o{ TagsPerIngredients      : "N-1"
+
+Type                     ||--o{ Product                 : "1-N"
 
 @enduml
