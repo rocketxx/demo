@@ -1,6 +1,5 @@
 package com.example.demo.model;
 
-
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.example.demo.enumerator.RestaurantType;
@@ -15,12 +14,22 @@ import java.util.List;
 @Getter
 @Setter
 public class Restaurant extends BaseEntityImageOptions {
-    private String name;
     private RestaurantType type;
-    private Address address;
-    private String phone;
+
+    private String name;
+    private String socialReason;
+    private String vat;
     private boolean opened; //indica se il ristorante è aperto o chiuso
-    private List<MenuItem> menu; //?
+
+    /*
+     * > ciò che è legato in maniera UNIVOCA al ristorante, non ha una zona di trasparenza con l'app
+     * > ciò che è in numero finito
+     * > ciò che è utile alla ricerca del ristorante
+    */
+    /* Contacts as email, phonenumber*/
+    private List<Contact> contacts;
+    /* Contacts as email, phonenumber*/
+    private List<Address> addresses;
+    /* Restaurant can configure workingHours */
     private List<WorkingHours> workingHours;
-    private List<Category> categories; // sarebbero gli item attivi disponibili: pizze,bevande,panini,insalate
 }

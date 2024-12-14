@@ -7,13 +7,11 @@ import com.example.demo.model.common.BaseEntityImageOptions;
 import lombok.Getter;
 import lombok.Setter;
 
-/* Categorie sono dell'app */
-@Document(collection = "categories")
+/* Tags sono dell'app, hanno senso per indicare celiachia, vegani, etc? */
+@Document(collection = "tags")
 @Getter
 @Setter
-public class Category extends BaseEntityImageOptions {
-    /* Level of category */
-    private String level;
+public class Tag extends BaseEntityImageOptions {
     /* Name of category */
     private String name;
 }

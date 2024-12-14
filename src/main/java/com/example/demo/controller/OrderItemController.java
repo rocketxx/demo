@@ -1,8 +1,6 @@
 package com.example.demo.controller;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,13 +22,13 @@ public class OrderItemController {
     @Autowired
     private OrderItemRepository orderItemRepository;
 
-    @GetMapping("/get-by-user/{userId}")
-    public List<OrderItem> getByRestaurantId(@PathVariable String userId) {
-        return orderItemRepository.findByUserId(userId);
-    }
+    // @GetMapping("/get-by-user/{userId}")
+    // public List<OrderItem> getByRestaurantId(@PathVariable String userId) {
+    //     return orderItemRepository.findByUserId(userId);
+    // }
 
-            @GetMapping("/{id}")
-    public OrderItem getById(@PathVariable UUID id) throws Exception {
+    @GetMapping("/{id}")
+    public OrderItem getById(@PathVariable String id) throws Exception {
         Optional<OrderItem> optionalItem = orderItemRepository.findById(id);
         if (optionalItem.isPresent()) {
             return optionalItem.get();
@@ -40,7 +38,7 @@ public class OrderItemController {
     }
 
     @PutMapping("/update/{id}")
-public ResponseEntity<OrderItem> update(@PathVariable UUID id, @RequestBody OrderItem orderItemDetails) {
+public ResponseEntity<OrderItem> update(@PathVariable String id, @RequestBody OrderItem orderItemDetails) {
     Optional<OrderItem> optionalOrderItem = orderItemRepository.findById(id);
     if (!optionalOrderItem.isPresent()) return ResponseEntity.notFound().build();
 
@@ -54,7 +52,7 @@ public ResponseEntity<OrderItem> update(@PathVariable UUID id, @RequestBody Orde
     }
 
     @DeleteMapping("/delete/{itemId}")
-    public String deleteOrderItem(@PathVariable UUID itemId) throws Exception {
+    public String deleteOrderItem(@PathVariable String itemId) throws Exception {
         Optional<OrderItem> optionalOrderItem = orderItemRepository.findById(itemId);
         if (optionalOrderItem.isPresent()) {
             orderItemRepository.delete(optionalOrderItem.get());

@@ -1,0 +1,69 @@
+@startuml
+'entities
+entity User {
+    * id : UUID
+    * contacts : List<Contact>
+}
+entity Restaurant {
+    * id : UUID
+    * addresses : List<Address>
+    * contacts : List<Contact>
+    * workingHours : List<WorkingHour>
+}
+entity Product {
+    * id : UUID
+}
+entity Ingredient {
+    * id : UUID
+}
+entity Order {
+    * id : UUID
+    * orderIems : List<OrderItem>
+}
+class OrderItem <<nested>> {
+    * id : UUID
+}
+class Contact <<nested>>{
+    * string : email
+    * string : phoneNumber
+}
+class Address <<nested>>{
+    * id : UUID
+}
+class Category {
+    * id : UUID
+}
+
+class WorkingHour <<nested>> {
+    * id : UUID
+}
+class Tag {
+    * id : UUID
+}
+class CategoriesPerRestaurants {
+    * id : UUID
+}
+class IngredientsPerProducts {
+    * id : UUID
+    * restaurantId : Restaurant
+}
+class TagsPerIngredients {
+    * id : UUID
+}
+
+'relations
+Restaurant               ||--o{ Order                   : "1-N"
+
+User                     ||--o{ Order                   : "1-N"
+
+CategoriesPerRestaurants ||--o{ Category                : "1-N"
+Restaurant               ||--o{ CategoriesPerRestaurants: "N-1"
+
+IngredientsPerProducts   ||--o{ Restaurant              : "N-1"
+IngredientsPerProducts   ||--o{ Ingredient              : "1-N"
+Product                  ||--o{ IngredientsPerProducts  : "N-1"
+
+TagsPerIngredients       ||--o{ Ingredient              : "1-N"
+Tag                      ||--o{ TagsPerIngredients      : "N-1"
+
+@enduml

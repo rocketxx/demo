@@ -1,21 +1,24 @@
 package com.example.demo.model;
 
-import java.util.UUID;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.example.demo.model.common.BaseEntityImageOptions;
+import com.example.demo.model.common.BaseEntityPriceOptions;
 
 import lombok.Getter;
 import lombok.Setter;
 
+/* Gli ingredienti sono dei ristoranti */
 @Document(collection = "ingredients")
 @Getter
 @Setter
-public class Ingredient extends BaseEntityImageOptions {
+public class Ingredient extends BaseEntityPriceOptions {
     private String name;
-    private String type;        //?enum?
+    private String tag;        //?enum?
     private String avaibleFor; //?
-    private float price;
-    private UUID restaurantId;  //ingredienti del ristorante
+
+    /* Only for filtering */
+    // private UUID restaurantId;  //ingredienti del ristorante
+    @DBRef private Restaurant restaurant;
 }

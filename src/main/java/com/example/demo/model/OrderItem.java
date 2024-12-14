@@ -1,24 +1,23 @@
 package com.example.demo.model;
 
-
-import java.util.List;
-
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import com.example.demo.model.common.BaseEntity;
-
 import lombok.Getter;
 import lombok.Setter;
 
-@Document
+/* 
+ * OrderItem rappresenta l'ordine configurabile per l'utente, che rimarra immutato una volta scelto.
+ * 
+ * Da considerare:
+ *  - cosa succede se si ripropone lo stesso menu e non ci sono ingredienti?
+ *
+ * */
 @Getter
 @Setter
-public class OrderItem extends BaseEntity {
-    private List<Ingredient> ingredients; //qui i panini/pizze custom
+public class OrderItem {
+    /* Quantity selected */
     private int quantity;
+    /* Note added */
     private String note;
-    private String type;
-    private String userId;  //ordini di un utente
 
-    private MenuItem menuItem; //qui i menu standard predefiniti dal ristorante //?
+    /* A new fresh product to compose, nested in OrderItem */
+    private Product product;
 }

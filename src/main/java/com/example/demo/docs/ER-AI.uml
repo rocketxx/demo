@@ -1,0 +1,82 @@
+@startuml
+entity User {
+    * id : UUID
+    ---
+    name : string
+}
+entity Contact {
+    * id : UUID
+    ---
+    email : string
+    phoneNumber : string
+    addressId : UUID [FK -> Address.id]
+    userId : UUID [FK -> User.id]
+    restaurantId : UUID [FK -> Restaurant.id]
+}
+entity Address {
+    * id : UUID
+    ---
+    street : string
+    city : string
+    country : string
+}
+entity Restaurant {
+    * id : UUID
+    ---
+    name : string
+    addressId : UUID [FK -> Address.id]
+}
+entity Product {
+    * id : UUID
+    ---
+    name : string
+    restaurantId : UUID [FK -> Restaurant.id]
+}
+entity Category {
+    * id : UUID
+    ---
+    name : string
+}
+entity Ingredient {
+    * id : UUID
+    ---
+    name : string
+    productId : UUID [FK -> Product.id]
+    categoryId : UUID [FK -> Category.id]
+}
+entity Order {
+    * id : UUID
+    ---
+    userId : UUID [FK -> User.id]
+    restaurantId : UUID [FK -> Restaurant.id]
+    orderDate : datetime
+}
+entity OrderItem {
+    * id : UUID
+    ---
+    orderId : UUID [FK -> Order.id]
+    productId : UUID [FK -> Product.id]
+    quantity : int
+    price : decimal
+}
+entity WorkingHours {
+    * id : UUID
+    ---
+    restaurantId : UUID [FK -> Restaurant.id]
+    dayOfWeek : string
+    openTime : time
+    closeTime : time
+}
+
+'relations
+User        ||---o{ Contact
+Contact     }o---|| Address
+Restaurant  ||---o{ Contact
+Restaurant  ||---o{ Product
+Restaurant  ||---o{ Order
+Restaurant  ||---o{ WorkingHours
+Product     ||---o{ Ingredient
+Category    ||---o{ Ingredient
+User        ||---o{ Order
+Order       ||---o{ OrderItem
+@enduml

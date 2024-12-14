@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +28,7 @@ public class IngredientController {
     }
 
     @GetMapping("/by-id/{id}")
-    public Optional<Ingredient> getIngredientById(@PathVariable UUID id) {
+    public Optional<Ingredient> getIngredientById(@PathVariable String id) {
         return ingredientsRepository.findById(id);
     }
 
@@ -58,7 +57,7 @@ public class IngredientController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Ingredient> updateIngredient(@PathVariable UUID id,
+    public ResponseEntity<Ingredient> updateIngredient(@PathVariable String id,
             @RequestBody Ingredient ingredientDetails) {
         Optional<Ingredient> optionalIngredient = ingredientsRepository.findById(id);
         if (!optionalIngredient.isPresent()) {
@@ -68,7 +67,7 @@ public class IngredientController {
         Ingredient existingIngredient = optionalIngredient.get();
                     existingIngredient.setName(ingredientDetails.getName());
                     existingIngredient.setEnabled(ingredientDetails.isEnabled());
-                    existingIngredient.setType(ingredientDetails.getType());
+                    existingIngredient.setTag(ingredientDetails.getTag());
                     existingIngredient.setPrice(ingredientDetails.getPrice());
                     existingIngredient.setAvaibleFor(ingredientDetails.getAvaibleFor());
 
