@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.demo.model.beans;
 
 import org.springframework.data.geo.Point;
 

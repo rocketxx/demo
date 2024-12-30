@@ -1,4 +1,5 @@
-package com.example.demo.model;
+package com.example.demo.model.beans;
+import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -7,15 +8,15 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class WorkingHours {
-    private String dayOfWeek; // "Monday", "Tuesday", etc.
+public class WorkingHour {
+    private DayOfWeek dayOfWeek; // "Monday", "Tuesday", etc.
+    private Boolean closed; // indicates if the restaurant is closed on this day
     private LocalTime openingTime;
     private LocalTime closingTime;
-    private Boolean closed; // indicates if the restaurant is closed on this day
     private List<String> holidays; // list of dates the restaurant is closed
 
-    public WorkingHours() {}
-    public WorkingHours(String dayOfWeek, LocalTime openingTime, LocalTime closingTime, Boolean closed, List<String> holidays) {
+    public WorkingHour() {}
+    public WorkingHour(DayOfWeek dayOfWeek, LocalTime openingTime, LocalTime closingTime, Boolean closed, List<String> holidays) {
         this.dayOfWeek = dayOfWeek;
         this.openingTime = openingTime;
         this.closingTime = closingTime;

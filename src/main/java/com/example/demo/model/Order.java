@@ -3,6 +3,7 @@ package com.example.demo.model;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.example.demo.model.beans.Address;
 import com.example.demo.model.common.BaseEntityPriceOptions;
 import com.example.demo.model.common.OrderState;
 

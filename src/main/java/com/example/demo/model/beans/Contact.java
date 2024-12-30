@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.demo.model.beans;
 
 import com.example.demo.model.common.BaseEntityImageOptions;
 

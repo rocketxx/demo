@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.example.demo.model.beans.Address;
+import com.example.demo.model.beans.Contact;
 import com.example.demo.model.common.BaseEntityImageOptions;
 
 import lombok.Getter;
@@ -16,8 +18,8 @@ import lombok.Setter;
 public class User extends BaseEntityImageOptions {
     private String firstName;
     private String lastName;
-    private String email;
     private String username;
+    private String email;
     
     /* Only user can modify his contacts */
     private List<Contact> contacts;
