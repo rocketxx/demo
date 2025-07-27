@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import java.util.List;
+
 import com.example.demo.model.common.BaseEntity;
 
 import lombok.Getter;
@@ -20,6 +22,8 @@ public class OrderItem extends BaseEntity {
     /* Note added */
     private String note;
 
-    /* A new fresh product to compose, nested in OrderItem */
+    /* A new fresh product composed, nested and copied in OrderItem */
     private Product product;
+    /* A list of ingredients selected, nested and copied in OrderItem */
+    private List<IngredientsPerProducts> orderItems;
 }
